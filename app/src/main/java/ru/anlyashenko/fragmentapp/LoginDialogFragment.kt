@@ -10,14 +10,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import ru.anlyashenko.fragmentapp.databinding.DialogAddNoteBinding
+import androidx.core.graphics.drawable.toDrawable
 
-class LoginDialogFragment : DialogFragment() {
+class LoginDialogFragment : DialogFragment(){
 
-    lateinit var listener: LoginListener
+    private lateinit var listener: LoginListener
 
     private var _binding: DialogAddNoteBinding? = null
     private val binding
-        get() = _binding ?: throw IllegalStateException("Ошибка")
+        get() = _binding ?: throw IllegalStateException("Binding for DialogAddNoteBinding must not be null")
 
     interface LoginListener {
         fun onLoginClicked(login: String, password: String)
@@ -26,7 +27,7 @@ class LoginDialogFragment : DialogFragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         listener = context as? LoginListener
-            ?: throw ClassCastException("Parent fragment must implement LoginListener")
+            ?: throw ClassCastException("Parent Fragment must implement LoginListener")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +41,7 @@ class LoginDialogFragment : DialogFragment() {
             (resources.displayMetrics.widthPixels * 0.9).toInt(),
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
+
     }
 
     override fun onCreateView(

@@ -7,6 +7,6 @@
 
     <style name="Theme.FragmentApp" parent="Base.Theme.FragmentApp" />
     <style name="RoundedDialogTheme">
-        <item name="android:windowBackground">@drawable/dialog_background_rounded</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 </resources>
