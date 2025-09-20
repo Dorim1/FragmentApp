@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:paddingStart="25dp"
+    android:gravity="start"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvOption1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Option_1"
+        android:textColor="@color/white"
+        android:drawableTint="@color/white"
+        android:textSize="16sp"
+        app:drawableStartCompat="@drawable/ic_air" />
+
+    <TextView
+        android:id="@+id/tvOption2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Option_2"
+        android:textColor="@color/white"
+        android:drawableTint="@color/white"
+        android:textSize="16sp"
+        app:drawableStartCompat="@drawable/ic_header_logo" />
+
+    <TextView
+        android:id="@+id/tvOption3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Option_3"
+        android:textColor="@color/white"
+        android:drawableTint="@color/white"
+        android:textSize="16sp"
+        app:drawableStartCompat="@drawable/ic_location" />
+
+</LinearLayout>

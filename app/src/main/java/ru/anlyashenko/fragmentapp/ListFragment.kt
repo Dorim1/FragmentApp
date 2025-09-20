@@ -10,9 +10,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import ru.anlyashenko.fragmentapp.databinding.FragmentListBinding
 
-class ListFragment : Fragment() {
+class ListFragment : Fragment(), OptionsBottomSheetFragment.OptionsListener {
 
     private var _binding: FragmentListBinding? = null
     private val binding
@@ -44,6 +45,10 @@ class ListFragment : Fragment() {
         binding.btnOpenAddNote.setOnClickListener {
             showLoginDialog()
         }
+
+        binding.btnOpenBottomSheet.setOnClickListener {
+            OptionsBottomSheetFragment().show(childFragmentManager, "BottomSheet")
+        }
     }
 
 
@@ -58,7 +63,9 @@ class ListFragment : Fragment() {
         dialog.show(parentFragmentManager, "LoginDialog")
     }
 
-
+    override fun onOptionClicked(optionId: String) {
+        Toast.makeText(requireContext(), "Вы выбрали $optionId", Toast.LENGTH_SHORT).show()
+    }
 
 
 }
