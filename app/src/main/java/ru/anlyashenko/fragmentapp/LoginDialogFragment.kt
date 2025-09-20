@@ -31,7 +31,7 @@ class LoginDialogFragment : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(DialogFragment.STYLE_NORMAL, R.style.RoundedDialogTheme)
+        setStyle(STYLE_NORMAL, R.style.RoundedDialogTheme)
     }
 
     override fun onStart() {
