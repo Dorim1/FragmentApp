@@ -8,9 +8,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.DialogFragment
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import ru.anlyashenko.fragmentapp.databinding.ActivityMain2Binding
 
-class MainActivity2 : AppCompatActivity(), LoginDialogFragment.LoginListener{
+class MainActivity2 : AppCompatActivity(){
 
     private lateinit var binding: ActivityMain2Binding
 
@@ -25,13 +28,13 @@ class MainActivity2 : AppCompatActivity(), LoginDialogFragment.LoginListener{
             insets
         }
 
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.main, ListFragment())
-            .commit()
-    }
+        val host: NavHostFragment = supportFragmentManager
+            .findFragmentById(R.id.navFragment) as NavHostFragment? ?: return
+        val navController = host.navController
 
-    override fun onLoginClicked(login: String, password: String) {
-        Toast.makeText(this, "Вход выполнен", Toast.LENGTH_SHORT).show()
-    }
+        binding.navView.setupWithNavController(navController)
 
+        val appBarConfiguration = AppBarConfiguration(navController.graph, binding.drawerLayout)
+        binding.toolbar2.setupWithNavController(navController, appBarConfiguration)
+    }
 }
