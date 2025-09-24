@@ -33,6 +33,7 @@ class MainActivity2 : AppCompatActivity(){
         val navController = host.navController
 
         binding.navView.setupWithNavController(navController)
+        //
 
         val appBarConfiguration = AppBarConfiguration(navController.graph, binding.drawerLayout)
         binding.toolbar2.setupWithNavController(navController, appBarConfiguration)
