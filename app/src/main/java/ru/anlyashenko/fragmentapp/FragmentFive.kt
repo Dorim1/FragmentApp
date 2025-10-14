@@ -5,30 +5,28 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
-import ru.anlyashenko.fragmentapp.databinding.FragmentFourBinding
+import ru.anlyashenko.fragmentapp.databinding.FragmentFiveBinding
 
-class FragmentFour : Fragment() {
+class FragmentFive : Fragment() {
 
-    private var _binding: FragmentFourBinding? = null
+    private var _binding: FragmentFiveBinding? = null
     private val binding
-        get() = _binding ?: throw IllegalStateException("Binding for FragmentFourBinding must not be null")
+        get() = _binding ?: throw IllegalStateException("Binding for FragmentFiveBinding must not be null")
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentFourBinding.inflate(inflater, container, false)
+        _binding = FragmentFiveBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val navController = findNavController()
-
-        binding.btnOpenFragmentFive.setOnClickListener {
-            navController.navigate(R.id.action_fragmentFour_to_fragmentFive)
-        }
     }
 
     override fun onDestroyView() {

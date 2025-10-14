@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import ru.anlyashenko.fragmentapp.databinding.FragmentOneBinding
@@ -27,8 +28,17 @@ class FragmentOne : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val navController = findNavController()
 
-        binding.btnToFragment2.setOnClickListener { navController.navigate(R.id.fragmentTwo) }
-        binding.btnToFragment3.setOnClickListener { navController.navigate(R.id.fragmentThree) }
+        binding.btnToFragment2.setOnClickListener {
+            val user = User(1, "test1")
+
+            val action = FragmentOneDirections.actionFragmentOneToFragmentTwo(user)
+            navController.navigate(action)
+
+        }
+        binding.btnToFragment3.setOnClickListener {
+            Toast.makeText(requireContext(), "а это есть на нижней панели", Toast.LENGTH_SHORT).show()
+        }
+
         binding.btnToFragment4.setOnClickListener { navController.navigate(R.id.fragmentFour) }
     }
 

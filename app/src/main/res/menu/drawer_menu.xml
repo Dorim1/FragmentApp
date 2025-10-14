@@ -1,24 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/fragmentOne"
-        android:title="Фрагмент 1"
-        android:icon="@drawable/ic_air"/>
-
-    <item
-        android:id="@+id/fragmentTwo"
-        android:title="Фрагмент 2"
-        android:icon="@drawable/ic_air"/>
-
-    <item
-        android:id="@+id/fragmentThree"
-        android:title="Фрагмент 3"
-        android:icon="@drawable/ic_air"/>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
 
     <item
         android:id="@+id/fragmentFour"
         android:title="Фрагмент 4"
         android:icon="@drawable/ic_air"/>
 
-
+    <item
+        android:id="@+id/nav_graph_three"
+        android:title="Фрагмент 3"
+        android:icon="@drawable/ic_air"/>
 </menu>

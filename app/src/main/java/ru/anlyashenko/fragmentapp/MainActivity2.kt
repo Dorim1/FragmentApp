@@ -8,8 +8,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.DialogFragment
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import ru.anlyashenko.fragmentapp.databinding.ActivityMain2Binding
 
@@ -28,14 +30,20 @@ class MainActivity2 : AppCompatActivity(){
             insets
         }
 
-        val host: NavHostFragment = supportFragmentManager
-            .findFragmentById(R.id.navFragment) as NavHostFragment? ?: return
-        val navController = host.navController
-
-        binding.navView.setupWithNavController(navController)
-        //
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.navFragment) as NavHostFragment
+        val navController = navHostFragment.navController
 
         val appBarConfiguration = AppBarConfiguration(navController.graph, binding.drawerLayout)
-        binding.toolbar2.setupWithNavController(navController, appBarConfiguration)
+
+        // Эта строка связывает Toolbar с NavController и DrawerLayout.
+        // Она отвечает за иконку-"гамбургер" и стрелку "назад".
+        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
+
+        // Эта строка связывает нижнее меню с NavController.
+        binding.bottomNavMenu.setupWithNavController(navController)
+
+        // Эта строка связывает боковое меню с NavController
+        binding.navigationView.setupWithNavController(navController)
     }
 }
