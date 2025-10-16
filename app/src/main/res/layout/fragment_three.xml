@@ -1,49 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".FragmentThree">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tvDescFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="80dp"
-        android:textSize="24dp"
-        android:text="Это фрагмент 3" />
+    <LinearLayout
 
-    <EditText
-        android:id="@+id/etAddNote"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:hint="Add note"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".FragmentThree">
 
-    <Button
-        android:id="@+id/btnSaveNote"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center"
-        android:text="Сохранить запись"/>
+        <TextView
+            android:id="@+id/tvDescFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="80dp"
+            android:textSize="24sp"
+            android:text="Это фрагмент 3" />
 
-    <Button
-        android:id="@+id/btnLoadNote"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center"
-        android:text="Загрузить запись"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvListNotes"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"/>
 
-    <Button
-        android:id="@+id/btnDeleteNote"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center"
-        android:text="Удалить запись"/>
+        <EditText
+            android:id="@+id/etAddNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:hint="Add note"/>
 
-</LinearLayout>
+        <EditText
+            android:id="@+id/etInputAge"
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:hint="Add age"/>
+
+        <EditText
+            android:id="@+id/etInputName"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:hint="Add name"/>
+
+        <Button
+            android:id="@+id/btnSaveNote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:text="Сохранить запись"/>
+
+        <Button
+            android:id="@+id/btnLoadNote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:text="Загрузить запись"/>
+
+        <Button
+            android:id="@+id/btnDeleteNote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:text="Удалить запись"/>
+
+        <Button
+            android:id="@+id/btnAddNote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:text="Добавить запись"/>
+
+    </LinearLayout>
+
+</ScrollView>
+
