@@ -1,6 +1,11 @@
 package ru.anlyashenko.fragmentapp
 
+import android.content.ContentValues
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +23,7 @@ class FragmentThree : Fragment() {
     private val binding
         get() = _binding ?: throw IllegalStateException("Binding for FragmentThreeBinding must not be null")
 
+
     private val gson = Gson()
     private lateinit var listAdapter: ListAdapter
     private val tasks = mutableListOf<Task>()
@@ -32,47 +38,9 @@ class FragmentThree : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val file = File(requireContext().filesDir, NOTE_FILENAME)
+        val file = File(requireContext().filesDir, TASKS_FILENAME)
         setupRecyclerView()
         loadTasks()
-
-        binding.btnSaveNote.setOnClickListener {
-            val ageToSave = binding.etInputAge.text.toString().toIntOrNull() ?: 0
-            val nameToSave = binding.etInputName.text.toString()
-
-            val user = User(
-                age = ageToSave,
-                name = nameToSave,
-            )
-
-            val gsonString = Gson().toJson(user)
-            file.writeText(gsonString) // тут под капотом уже используется .use
-
-            // но можно написать еще так
-//            file.writer().use {
-//                it.write(textToSave)
-//            }
-
-            Toast.makeText(requireContext(), "User сохранен!", Toast.LENGTH_SHORT).show()
-        }
-
-        binding.btnLoadNote.setOnClickListener {
-            // проверка на существование файла
-            if (file.exists()) {
-                val readContent = file.readText() // также используется .use под капотом
-
-                // расширенная версия
-//                val readContent = file.reader().use { it.readText() }
-
-                val userObject = gson.fromJson(readContent, User::class.java)
-                binding.etAddNote.setText(readContent)
-                binding.etInputAge.setText(userObject.age.toString())
-                binding.etInputName.setText(userObject.name)
-                Toast.makeText(requireContext(), "User загружен!", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(requireContext(), "User не существует", Toast.LENGTH_SHORT).show()
-            }
-        }
 
         binding.btnDeleteNote.setOnClickListener {
             if (file.exists()) {
@@ -92,7 +60,6 @@ class FragmentThree : Fragment() {
                 saveTask()
             }
         }
-
 
     }
 
@@ -126,7 +93,6 @@ class FragmentThree : Fragment() {
     }
 
     companion object {
-        const val NOTE_FILENAME = "my_private_note.txt"
         const val TASKS_FILENAME = "tasks.json"
     }
 

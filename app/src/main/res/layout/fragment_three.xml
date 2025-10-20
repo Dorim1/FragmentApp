@@ -33,38 +33,6 @@
             android:layout_marginHorizontal="20dp"
             android:hint="Add note"/>
 
-        <EditText
-            android:id="@+id/etInputAge"
-            android:inputType="number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:hint="Add age"/>
-
-        <EditText
-            android:id="@+id/etInputName"
-            android:inputType="text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:hint="Add name"/>
-
-        <Button
-            android:id="@+id/btnSaveNote"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_gravity="center"
-            android:text="Сохранить запись"/>
-
-        <Button
-            android:id="@+id/btnLoadNote"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_gravity="center"
-            android:text="Загрузить запись"/>
-
         <Button
             android:id="@+id/btnDeleteNote"
             android:layout_width="wrap_content"
@@ -79,7 +47,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_gravity="center"
-            android:text="Добавить запись"/>
+            android:text="Добавить задачу"/>
+
 
     </LinearLayout>
 
