@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_graph_one"
+        android:title="one"
+        android:icon="@drawable/ic_air"/>
+
+    <item
+        android:id="@+id/nav_graph_three"
+        android:title="three"
+        android:icon="@drawable/ic_header_logo"/>
+</menu>
