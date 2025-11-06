@@ -31,6 +31,9 @@
                 app:destination="@id/fragmentFour"
                 app:restoreState="true"
                 app:popUpToSaveState="true"/>
+            <action
+                android:id="@+id/action_fragmentOne_to_networkFragment"
+                app:destination="@id/networkFragment" />
         </fragment>
 
         <fragment
@@ -42,6 +45,12 @@
                 android:name="user"
                 app:argType="ru.anlyashenko.fragmentapp.User" />
         </fragment>
+
+        <fragment
+            android:id="@+id/networkFragment"
+            android:name="ru.anlyashenko.fragmentapp.view.NetworkFragment"
+            android:label="fragment_network"
+            tools:layout="@layout/fragment_network" />
 
         <fragment
             android:id="@+id/fragmentFour"
@@ -66,4 +75,5 @@
             android:label="fragment_three"
             tools:layout="@layout/fragment_three" />
     </navigation>
+
 </navigation>

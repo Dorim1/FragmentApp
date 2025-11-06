@@ -55,6 +55,7 @@ dependencies {
     implementation(libs.navigation.ui.ktx)
     implementation(libs.androidx.fragment)
     implementation(libs.google.gson)
+    implementation(libs.okhttp)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

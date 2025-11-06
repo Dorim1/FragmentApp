@@ -40,6 +40,8 @@ class FragmentOne : Fragment() {
         }
 
         binding.btnToFragment4.setOnClickListener { navController.navigate(R.id.fragmentFour) }
+
+        binding.btnToFragmentNetwork.setOnClickListener { navController.navigate(R.id.action_fragmentOne_to_networkFragment) }
     }
 
 }
