@@ -7,14 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.VIEW_MODEL_STORE_OWNER_KEY
-import okhttp3.Call
-import okhttp3.Callback
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.Response
-import okio.IOException
-import okio.use
+import androidx.recyclerview.widget.LinearLayoutManager
 import ru.anlyashenko.fragmentapp.databinding.FragmentNetworkBinding
 import ru.anlyashenko.fragmentapp.viewModel.PostViewModel
 import ru.anlyashenko.fragmentapp.viewModel.UserViewModel
@@ -27,6 +20,9 @@ class NetworkFragment : Fragment() {
 
     private val viewModel: PostViewModel by viewModels()
     private val viewModel2: UserViewModel by viewModels()
+
+    val adapter = PostAdapter()
+
 
 //    private val client = OkHttpClient()
 
@@ -41,7 +37,7 @@ class NetworkFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnFetchOkhttp.setOnClickListener { viewModel.loadPost() }
+//        binding.btnFetchOkhttp.setOnClickListener { viewModel.loadPost() }
         viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             if (isLoading) {
                 binding.progressBar.visibility = View.VISIBLE
@@ -50,8 +46,14 @@ class NetworkFragment : Fragment() {
             }
         }
 
-        viewModel.postTitle.observe(viewLifecycleOwner) { title ->
-            binding.tvResult.text = title
+        viewModel.loadPost()
+
+        binding.postsRecyclerView.adapter = adapter
+        binding.postsRecyclerView.layoutManager =
+            LinearLayoutManager(requireContext())
+
+        viewModel.posts.observe(viewLifecycleOwner) { postList ->
+            adapter.submitList(postList)
         }
 
         viewModel.error.observe(viewLifecycleOwner) { error ->
