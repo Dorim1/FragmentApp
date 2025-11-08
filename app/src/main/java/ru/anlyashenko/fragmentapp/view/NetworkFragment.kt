@@ -20,11 +20,7 @@ class NetworkFragment : Fragment() {
 
     private val viewModel: PostViewModel by viewModels()
     private val viewModel2: UserViewModel by viewModels()
-
-    val adapter = PostAdapter()
-
-
-//    private val client = OkHttpClient()
+    private val adapter = PostAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,7 +33,11 @@ class NetworkFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        binding.btnFetchOkhttp.setOnClickListener { viewModel.loadPost() }
+        binding.btnFetchOkhttp.setOnClickListener {
+            Toast.makeText(requireContext(), "Это мы урезали", Toast.LENGTH_SHORT).show()
+        }
+
+        // ---POST---
         viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             if (isLoading) {
                 binding.progressBar.visibility = View.VISIBLE
@@ -46,11 +46,11 @@ class NetworkFragment : Fragment() {
             }
         }
 
-        viewModel.loadPost()
-
         binding.postsRecyclerView.adapter = adapter
         binding.postsRecyclerView.layoutManager =
             LinearLayoutManager(requireContext())
+
+        viewModel.loadPost()
 
         viewModel.posts.observe(viewLifecycleOwner) { postList ->
             adapter.submitList(postList)
@@ -60,7 +60,39 @@ class NetworkFragment : Fragment() {
             Toast.makeText(requireContext(), "Ошибка: $error", Toast.LENGTH_SHORT).show()
         }
 
+        binding.btnDelete.setOnClickListener {
+            val id = binding.etPostIdDelete.text.toString()
+            if (id.isNotBlank()) {
+                viewModel.deletePost(id.toInt())
+            } else {
+                Toast.makeText(requireContext(), "Введите число", Toast.LENGTH_SHORT).show()
+            }
+        }
 
+        viewModel.deleteSuccess.observe(viewLifecycleOwner) {message ->
+            Toast.makeText(requireContext(), "$message", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.btnUpdate.setOnClickListener {
+            val id = binding.etPostIdToUpdate.text.toString()
+            val newTitle = binding.etNewTitle.text.toString()
+            val newBody = binding.etNewBody.text.toString()
+            if (id.isNotBlank() && newTitle.isNotBlank() && newBody.isNotBlank()) {
+                viewModel.updatePost(id.toInt(), newTitle, newBody)
+            }
+        }
+
+        viewModel.updateSuccess.observe(viewLifecycleOwner) { message ->
+            Toast.makeText(requireContext(), "$message", Toast.LENGTH_SHORT).show()
+        }
+
+
+
+
+
+
+
+        // ---USER---
         binding.btnFetchOkhttpUser.setOnClickListener { viewModel2.loadUser() }
         viewModel2.isLoading.observe(viewLifecycleOwner) { isLoading ->
             if (isLoading) {

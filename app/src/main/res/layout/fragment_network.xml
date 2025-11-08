@@ -20,6 +20,50 @@
         android:layout_height="wrap_content"
         android:text="Загрузить пользователя"/>
 
+    <EditText
+        android:id="@+id/etPostIdDelete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Введите id объекта для удаления"
+        android:layout_marginHorizontal="20dp"
+        android:inputType="number"/>
+
+    <EditText
+        android:id="@+id/etPostIdToUpdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Введите id объекта для обновления"
+        android:layout_marginHorizontal="20dp"
+        android:inputType="number"/>
+
+    <EditText
+        android:id="@+id/etNewTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Введите новый Title"
+        android:layout_marginHorizontal="20dp"
+        android:inputType="text"/>
+
+    <EditText
+        android:id="@+id/etNewBody"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Введите новый Body"
+        android:layout_marginHorizontal="20dp"
+        android:inputType="text"/>
+
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Удалить"/>
+
+    <Button
+        android:id="@+id/btnUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Обновить"/>
+
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="match_parent"
