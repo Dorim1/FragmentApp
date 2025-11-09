@@ -21,6 +21,8 @@ class PostViewModel : ViewModel() {
     val deleteSuccess: LiveData<String> = _deleteSuccess
     private val _updateSuccess = MutableLiveData<String>()
     val updateSuccess: LiveData<String> = _updateSuccess
+    private val _createSuccess = MutableLiveData<String>()
+    val createSuccess: LiveData<String> = _createSuccess
 
     fun loadPost() {
         _isLoading.value = true
@@ -35,7 +37,9 @@ class PostViewModel : ViewModel() {
         _isLoading.value = true
         repository.deletePost(postId) { result ->
             _isLoading.value = false
-            result.onSuccess { _deleteSuccess.value = "Пост $postId успешно удалён" }
+            result.onSuccess {
+                _posts.value = _posts.value?.filterNot { it.id == postId }
+                _deleteSuccess.value = "Пост $postId успешно удалён" }
             result.onFailure { e -> _error.value = e.message }
         }
     }
@@ -48,6 +52,21 @@ class PostViewModel : ViewModel() {
             result.onSuccess { updatePost -> _updateSuccess.value = "Пост ${updatePost.id} обновлён!" }
             result.onFailure { e -> _error.value = e.message }
         }
+    }
 
+    fun createPost(title: String, body: String) {
+        _isLoading.value = true
+        val newPost = Post(id = 0, userId = 1, title = title, body = body)
+        repository.createPost(newPost) {result ->
+            _isLoading.value = false
+            result.onSuccess { createdPost ->
+                val updateList = _posts.value.orEmpty().toMutableList().apply {
+                    add(0, createdPost)
+                }
+                _posts.postValue(updateList)
+                _createSuccess.postValue("Пост ${createdPost.title} создан!")
+            }
+            result.onFailure { e -> _error.value = e.message }
+        }
     }
 }

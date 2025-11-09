@@ -64,6 +64,12 @@
         android:layout_height="wrap_content"
         android:text="Обновить"/>
 
+    <Button
+        android:id="@+id/btnCreate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Создать"/>
+
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="match_parent"

@@ -6,6 +6,8 @@ import android.util.Log.e
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
 import com.google.gson.reflect.TypeToken
+import kotlinx.serialization.SerializationException
+import kotlinx.serialization.json.Json
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.MediaType.Companion.toMediaType
@@ -14,14 +16,13 @@ import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
 import okio.IOException
-import org.json.JSONArray
-import org.json.JSONException
-import org.json.JSONObject
+
 
 class PostRepository {
     private val client = OkHttpClient()
     private val uiHandler = Handler(Looper.getMainLooper())
-    private val gson = Gson()
+//    private val gson = Gson()
+    private val json = Json { ignoreUnknownKeys = true }
 
     fun fetchAllPosts(callback: (Result<List<Post>>) -> Unit) {
         val url = "https://jsonplaceholder.typicode.com/posts"
@@ -44,6 +45,8 @@ class PostRepository {
                         }
                     } else {
                         try {
+                            val responseBody = it.body.string()
+
                             // Без GSON
 //                        val responseBody = response.body.string()
 //                        val jsonArray = JSONArray(responseBody)
@@ -60,13 +63,16 @@ class PostRepository {
 //                          }
 
                             // С GSON
-                            val responseBody = it.body.string()
-                            val listType = object : TypeToken<List<Post>>() {}.type
-                            val postList: List<Post> = gson.fromJson(responseBody, listType)
+//                            val listType = object : TypeToken<List<Post>>() {}.type
+//                            val postList: List<Post> = gson.fromJson(responseBody, listType)
+
+
+                            // С Kotlinx.serialization
+                            val postList: List<Post> = json.decodeFromString(responseBody)
                             uiHandler.post {
                                 callback(Result.success(postList))
                             }
-                        } catch (e: JsonSyntaxException) {
+                        } catch (e: SerializationException) {
                             uiHandler.post { callback(Result.failure(e)) }
                         }
                     }
@@ -100,9 +106,11 @@ class PostRepository {
 
     fun updatePost(post: Post, callback: (Result<Post>) -> Unit) {
         val url = "https://jsonplaceholder.typicode.com/posts/${post.id}"
-        val jsonString = gson.toJson(post)
+//        val jsonString = gson.toJson(post) C GSON
+        val jsonString = json.encodeToString(post) // Kotlinx.serialization
         val mediaType = "application/json; charset=utf-8".toMediaType()
         val requestBody = jsonString.toRequestBody(mediaType)
+
         val request = Request.Builder()
             .url(url)
             .put(requestBody)
@@ -120,9 +128,10 @@ class PostRepository {
                        } else {
                            try {
                                val responseBody = it.body.string()
-                               val updatePost: Post = gson.fromJson(responseBody, Post::class.java)
+//                               val updatePost: Post = gson.fromJson(responseBody, Post::class.java) С GSON
+                               val updatePost = json.decodeFromString<Post>(responseBody) // Kotlinx.serialization
                                uiHandler.post { callback(Result.success(updatePost)) }
-                           }catch (e: JsonSyntaxException) {
+                           }catch (e: SerializationException) {
                                uiHandler.post { callback(Result.failure(e)) }
                            }
                        }
@@ -132,4 +141,41 @@ class PostRepository {
         })
     }
 
+    fun createPost(post: Post, callback: (Result<Post>) -> Unit) {
+        val url = "https://jsonplaceholder.typicode.com/posts"
+//        val jsonString = gson.toJson(post) С GSON
+        val jsonString = json.encodeToString(post) // Kotlinx.serialization
+        val mediaType = "application/json; charset=utf-8".toMediaType()
+        val requestBody = jsonString.toRequestBody(mediaType)
+
+        val request = Request.Builder()
+            .url(url)
+            .post(requestBody)
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                uiHandler.post { callback(Result.failure(e)) }
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                response.use {
+                    if (!it.isSuccessful) {
+                        uiHandler.post { callback(Result.failure(Exception("Код: ${response.code}"))) }
+                    } else {
+                        try {
+                            val responseBody = it.body.string()
+//                            val createdPost = gson.fromJson(responseBody, Post::class.java) C GSON
+                            val createdPost = json.decodeFromString<Post>(responseBody) // Kotlinx.serialization
+                            uiHandler.post { callback(Result.success(createdPost)) }
+                        }catch (e: SerializationException) {
+                            uiHandler.post { callback(Result.failure(e)) }
+                        }
+
+                    }
+                }
+            }
+
+        })
+    }
 }

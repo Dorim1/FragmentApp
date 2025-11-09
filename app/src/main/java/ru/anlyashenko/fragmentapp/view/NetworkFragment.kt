@@ -81,10 +81,22 @@ class NetworkFragment : Fragment() {
                 viewModel.updatePost(id.toInt(), newTitle, newBody)
             }
         }
-
         viewModel.updateSuccess.observe(viewLifecycleOwner) { message ->
             Toast.makeText(requireContext(), "$message", Toast.LENGTH_SHORT).show()
         }
+
+        binding.btnCreate.setOnClickListener {
+            val title = binding.etNewTitle.text.toString()
+            val body = binding.etNewBody.text.toString()
+            if (title.isNotBlank() && body.isNotBlank()) {
+                viewModel.createPost(title, body)
+            }
+        }
+        viewModel.createSuccess.observe(viewLifecycleOwner) { message ->
+            Toast.makeText(requireContext(), "$message", Toast.LENGTH_SHORT).show()
+        }
+
+
 
 
 
