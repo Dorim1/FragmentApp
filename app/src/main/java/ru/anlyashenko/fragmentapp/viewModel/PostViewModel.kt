@@ -7,6 +7,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ru.anlyashenko.fragmentapp.model.Post
 import ru.anlyashenko.fragmentapp.model.PostRepository
+import ru.anlyashenko.fragmentapp.retrofit.Product
+import ru.anlyashenko.fragmentapp.retrofit.ProductRepository
+import ru.anlyashenko.fragmentapp.retrofit.ProductResponse
 import kotlin.math.PI
 
 class PostViewModel : ViewModel() {
@@ -23,6 +26,10 @@ class PostViewModel : ViewModel() {
     val updateSuccess: LiveData<String> = _updateSuccess
     private val _createSuccess = MutableLiveData<String>()
     val createSuccess: LiveData<String> = _createSuccess
+    private val productRepository = ProductRepository() // retrofit
+
+    private val _products = MutableLiveData<List<Product>>()
+    val products: LiveData<List<Product>> = _products
 
     fun loadPost() {
         _isLoading.value = true
@@ -67,6 +74,16 @@ class PostViewModel : ViewModel() {
                 _createSuccess.postValue("Пост ${createdPost.title} создан!")
             }
             result.onFailure { e -> _error.value = e.message }
+        }
+    }
+
+
+    fun loadProducts() {
+        _isLoading.value = true
+        productRepository.fetchAllProducts { result ->
+            _isLoading.value = false
+            result.onSuccess { productsList ->  _products.value = productsList}
+            result.onFailure { e -> _error.value = e.message ?: "Неизвестная ошибка" }
         }
     }
 }

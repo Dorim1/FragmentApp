@@ -4,9 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.anlyashenko.fragmentapp.databinding.ItemPostBinding
-import ru.anlyashenko.fragmentapp.model.Post
+import ru.anlyashenko.fragmentapp.retrofit.Product
 
-class PostAdapter : androidx.recyclerview.widget.ListAdapter<Post, PostAdapter.ViewHolder>(PostDiffCallback()) {
+class ProductAdapter : androidx.recyclerview.widget.ListAdapter<Product, ProductAdapter.ViewHolder>(
+    ProductDiffCallback()
+) {
 
     class ViewHolder(val binding: ItemPostBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -20,8 +22,8 @@ class PostAdapter : androidx.recyclerview.widget.ListAdapter<Post, PostAdapter.V
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val post = getItem(position)
-        holder.binding.tvTitle.text = post.title
+        val product = getItem(position)
+        holder.binding.tvTitle.text = product.title
     }
 
 }

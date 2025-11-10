@@ -58,6 +58,8 @@ dependencies {
     implementation(libs.google.gson)
     implementation(libs.okhttp)
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.retrofit2)
+    implementation(libs.retrofit.kotlinx.serialization)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

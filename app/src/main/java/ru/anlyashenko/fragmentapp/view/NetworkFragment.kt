@@ -21,6 +21,7 @@ class NetworkFragment : Fragment() {
     private val viewModel: PostViewModel by viewModels()
     private val viewModel2: UserViewModel by viewModels()
     private val adapter = PostAdapter()
+    private val adapter2 = ProductAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,8 +34,12 @@ class NetworkFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnFetchOkhttp.setOnClickListener {
-            Toast.makeText(requireContext(), "Это мы урезали", Toast.LENGTH_SHORT).show()
+        binding.btnFetchRetrofit.setOnClickListener {
+            viewModel.loadProducts()
+        }
+
+        viewModel.products.observe(viewLifecycleOwner) { products ->
+            adapter2.submitList(products)
         }
 
         // ---POST---
@@ -46,15 +51,15 @@ class NetworkFragment : Fragment() {
             }
         }
 
-        binding.postsRecyclerView.adapter = adapter
+        binding.postsRecyclerView.adapter = adapter2
         binding.postsRecyclerView.layoutManager =
             LinearLayoutManager(requireContext())
 
-        viewModel.loadPost()
+//        viewModel.loadPost()
 
-        viewModel.posts.observe(viewLifecycleOwner) { postList ->
-            adapter.submitList(postList)
-        }
+//        viewModel.posts.observe(viewLifecycleOwner) { postList ->
+//            adapter.submitList(postList)
+//        }
 
         viewModel.error.observe(viewLifecycleOwner) { error ->
             Toast.makeText(requireContext(), "Ошибка: $error", Toast.LENGTH_SHORT).show()
