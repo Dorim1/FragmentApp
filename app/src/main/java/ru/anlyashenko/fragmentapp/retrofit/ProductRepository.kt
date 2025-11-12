@@ -22,10 +22,36 @@ class ProductRepository {
         )
         .build()
 
-    private val productApi = retrofit.create(ProductApi::class.java)
+    private val mainApi = retrofit.create(MainApi::class.java)
+
+    fun fetchProductById(id: Int, callback: (Result<Product>) -> Unit) {
+        mainApi.getDataById(id).enqueue(object : Callback<Product> {
+            override fun onResponse(
+                call: Call<Product>,
+                response: Response<Product>
+            ) {
+                val product = response.body()
+                uiHandler.post {
+                    if (response.isSuccessful && product != null) {
+                        callback(Result.success(product))
+                    } else {
+                        callback(Result.failure(Exception("Ошибка: ${response.code()}")))
+                    }
+                }
+            }
+
+            override fun onFailure(
+                call: Call<Product>,
+                t: Throwable
+            ) {
+                uiHandler.post { callback(Result.failure(t)) }
+            }
+
+        })
+    }
 
     fun fetchAllProducts(callback: (Result<List<Product>>) -> Unit) {
-        productApi.getData().enqueue(object : Callback<ProductResponse> {
+        mainApi.getAllData().enqueue(object : Callback<ProductResponse> {
             override fun onResponse(
                 call: Call<ProductResponse>,
                 response: Response<ProductResponse>

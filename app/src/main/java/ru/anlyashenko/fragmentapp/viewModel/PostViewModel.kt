@@ -31,6 +31,9 @@ class PostViewModel : ViewModel() {
     private val _products = MutableLiveData<List<Product>>()
     val products: LiveData<List<Product>> = _products
 
+    private val _product = MutableLiveData<String>()
+    val product: LiveData<String> = _product
+
     fun loadPost() {
         _isLoading.value = true
         repository.fetchAllPosts { result ->
@@ -83,6 +86,15 @@ class PostViewModel : ViewModel() {
         productRepository.fetchAllProducts { result ->
             _isLoading.value = false
             result.onSuccess { productsList ->  _products.value = productsList}
+            result.onFailure { e -> _error.value = e.message ?: "Неизвестная ошибка" }
+        }
+    }
+
+    fun loadProductById(id: Int) {
+        _isLoading.value = true
+        productRepository.fetchProductById(id) { result ->
+            _isLoading.value = false
+            result.onSuccess { product -> _product.value = "${product.title}\n${product.category}\n${product.description}" }
             result.onFailure { e -> _error.value = e.message ?: "Неизвестная ошибка" }
         }
     }

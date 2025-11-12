@@ -36,11 +36,17 @@ class NetworkFragment : Fragment() {
 
         binding.btnFetchRetrofit.setOnClickListener {
             viewModel.loadProducts()
+            viewModel.loadProductById(2)
+        }
+
+        viewModel.product.observe(viewLifecycleOwner) {product ->
+            binding.tvResult.text = product
         }
 
         viewModel.products.observe(viewLifecycleOwner) { products ->
             adapter2.submitList(products)
         }
+
 
         // ---POST---
         viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->

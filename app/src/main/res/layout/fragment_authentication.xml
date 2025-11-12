@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context=".view.AuthenticationFragment">
+
+    <ImageView
+        android:id="@+id/ivUser"
+        android:layout_width="230dp"
+        android:layout_height="230dp"
+        android:layout_marginTop="140dp"
+        android:src="@drawable/image"/>
+
+    <TextView
+        android:id="@+id/tvFirstNameUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="24sp"
+        android:text="FirstName"/>
+
+    <TextView
+        android:id="@+id/tvLastNameUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="24sp"
+        android:text="LastName"/>
+
+    <EditText
+        android:id="@+id/etInputUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="60dp"
+        android:layout_marginTop="20dp"
+        android:inputType="text"
+        android:hint="Username"/>
+
+    <EditText
+        android:id="@+id/etInputPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="60dp"
+        android:layout_marginTop="10dp"
+        android:inputType="textPassword"
+        android:hint="Password"/>
+
+    <Button
+        android:id="@+id/btnSignIn"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="230dp"
+        android:text="Войти"/>
+
+</LinearLayout>

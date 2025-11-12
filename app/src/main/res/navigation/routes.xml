@@ -34,7 +34,16 @@
             <action
                 android:id="@+id/action_fragmentOne_to_networkFragment"
                 app:destination="@id/networkFragment" />
+            <action
+                android:id="@+id/action_fragmentOne_to_authenticationFragment"
+                app:destination="@id/authenticationFragment" />
         </fragment>
+
+        <fragment
+            android:id="@+id/authenticationFragment"
+            android:name="ru.anlyashenko.fragmentapp.view.AuthenticationFragment"
+            android:label="fragment_authentication"
+            tools:layout="@layout/fragment_authentication" />
 
         <fragment
             android:id="@+id/fragmentTwo"
@@ -75,5 +84,6 @@
             android:label="fragment_three"
             tools:layout="@layout/fragment_three" />
     </navigation>
+
 
 </navigation>

@@ -35,4 +35,11 @@
         android:layout_marginHorizontal="10dp"
         android:text="Фрагмент Network"/>
 
+    <Button
+        android:id="@+id/btnToFragmentAuthentication"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:text="Фрагмент Authentication "/>
+
 </LinearLayout>
