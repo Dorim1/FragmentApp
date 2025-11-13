@@ -72,4 +72,31 @@ class ProductRepository {
         })
     }
 
+    fun fetchProductBySearch(name: String, callback: (Result<List<Product>>) -> Unit) {
+        mainApi.getDataBySearch(name).enqueue(object : Callback<ProductResponse> {
+            override fun onResponse(
+                call: Call<ProductResponse?>,
+                response: Response<ProductResponse?>
+            ) {
+                val productsList = response.body()?.products
+                uiHandler.post {
+                    if (response.isSuccessful && productsList != null) {
+                        callback(Result.success(productsList))
+                    } else {
+                        callback(Result.failure(Exception("Ошибка: ${response.code()}")))
+                    }
+                }
+            }
+
+            override fun onFailure(
+                call: Call<ProductResponse?>,
+                t: Throwable
+            ) {
+                uiHandler.post { callback(Result.failure(t)) }
+            }
+
+        })
+
+    }
+
 }

@@ -5,6 +5,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Query
 import ru.anlyashenko.fragmentapp.model.AuthRequest
 import ru.anlyashenko.fragmentapp.model.User
 
@@ -17,4 +18,7 @@ interface MainApi {
 
     @POST("auth/login")
     fun auth(@Body authRequest: AuthRequest): Call<User>
+
+    @GET("products/search")
+    fun getDataBySearch(@Query("q") name: String): Call<ProductResponse>
 }

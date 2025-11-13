@@ -125,4 +125,13 @@ class PostViewModel : ViewModel() {
             result.onFailure { e -> _error.postValue(e.message) }
         }
     }
+
+    fun loadBySearch(name: String) {
+        _isLoading.value = true
+        productRepository.fetchProductBySearch(name) { result ->
+            _isLoading.value = false
+            result.onSuccess { productsList -> _products.value = productsList }
+            result.onFailure { e -> _error.value = e.message ?: "Неизвестная ошибка" }
+        }
+    }
 }
