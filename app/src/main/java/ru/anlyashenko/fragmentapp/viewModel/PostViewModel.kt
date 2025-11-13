@@ -1,12 +1,15 @@
 package ru.anlyashenko.fragmentapp.viewModel
 
 import android.app.usage.UsageEvents
+import android.service.autofill.UserData
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ru.anlyashenko.fragmentapp.model.Post
 import ru.anlyashenko.fragmentapp.model.PostRepository
+import ru.anlyashenko.fragmentapp.model.User
+import ru.anlyashenko.fragmentapp.retrofit.AuthRepository
 import ru.anlyashenko.fragmentapp.retrofit.Product
 import ru.anlyashenko.fragmentapp.retrofit.ProductRepository
 import ru.anlyashenko.fragmentapp.retrofit.ProductResponse
@@ -26,7 +29,17 @@ class PostViewModel : ViewModel() {
     val updateSuccess: LiveData<String> = _updateSuccess
     private val _createSuccess = MutableLiveData<String>()
     val createSuccess: LiveData<String> = _createSuccess
+
+
+
+
+
+        // Retrofit
     private val productRepository = ProductRepository() // retrofit
+    private val repositoryAuth = AuthRepository()
+
+    private val _user = MutableLiveData<User>()
+    val user: LiveData<User> = _user
 
     private val _products = MutableLiveData<List<Product>>()
     val products: LiveData<List<Product>> = _products
@@ -81,6 +94,13 @@ class PostViewModel : ViewModel() {
     }
 
 
+
+
+
+
+
+    // Retrofit
+
     fun loadProducts() {
         _isLoading.value = true
         productRepository.fetchAllProducts { result ->
@@ -96,6 +116,13 @@ class PostViewModel : ViewModel() {
             _isLoading.value = false
             result.onSuccess { product -> _product.value = "${product.title}\n${product.category}\n${product.description}" }
             result.onFailure { e -> _error.value = e.message ?: "Неизвестная ошибка" }
+        }
+    }
+
+    fun signIn(username: String, password: String) {
+        repositoryAuth.signIn(username, password) { result ->
+            result.onSuccess { userData -> _user.postValue(userData) }
+            result.onFailure { e -> _error.postValue(e.message) }
         }
     }
 }

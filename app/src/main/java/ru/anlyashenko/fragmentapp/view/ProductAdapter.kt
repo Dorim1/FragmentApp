@@ -23,7 +23,11 @@ class ProductAdapter : androidx.recyclerview.widget.ListAdapter<Product, Product
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val product = getItem(position)
-        holder.binding.tvTitle.text = product.title
+        holder.binding.apply {
+            tvTitle.text = product.title
+            tvDesc.text = product.description
+        }
+
     }
 
 }

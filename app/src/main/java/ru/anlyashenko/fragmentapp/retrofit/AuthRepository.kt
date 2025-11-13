@@ -38,7 +38,6 @@ class AuthRepository {
                 val user = response.body()
                 uiHandler.post {
                     if (response.isSuccessful && user != null) {
-                        Picasso.get().load(user.image)
                         callback(Result.success(user))
                     } else {
                         uiHandler.post { callback(Result.failure(Exception("Ошибка: ${response.code()}"))) }
