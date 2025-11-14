@@ -9,6 +9,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.kotlinx.serialization.asConverterFactory
+import ru.anlyashenko.fragmentapp.model.AuthRequest
+import ru.anlyashenko.fragmentapp.model.User
 
 class ProductRepository {
     private val json = Json { ignoreUnknownKeys = true }
@@ -72,8 +74,37 @@ class ProductRepository {
         })
     }
 
-    fun fetchProductBySearch(name: String, callback: (Result<List<Product>>) -> Unit) {
-        mainApi.getDataBySearch(name).enqueue(object : Callback<ProductResponse> {
+    fun signIn(callback: (Result<String>) -> Unit) {
+        val username = "emilys"
+        val password = "emilyspass"
+
+        mainApi.auth(AuthRequest(username, password,)).enqueue(object : Callback<User> {
+            override fun onResponse(
+                call: Call<User?>,
+                response: Response<User?>
+            ) {
+                val user = response.body()
+                uiHandler.post {
+                    if (response.isSuccessful && user != null) {
+                        callback(Result.success(user.accessToken))
+                    } else {
+                        callback(Result.failure(Exception("Ошибка: ${response.code()}")))
+                    }
+                }
+            }
+
+            override fun onFailure(
+                call: Call<User?>,
+                t: Throwable
+            ) {
+                uiHandler.post { callback(Result.failure(t)) }
+            }
+
+        })
+    }
+
+    fun fetchProductBySearch(token: String, name: String, callback: (Result<List<Product>>) -> Unit) {
+        mainApi.getDataBySearchAuth("Bearer $token", name).enqueue(object : Callback<ProductResponse> {
             override fun onResponse(
                 call: Call<ProductResponse?>,
                 response: Response<ProductResponse?>

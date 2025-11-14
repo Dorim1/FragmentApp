@@ -128,10 +128,16 @@ class PostViewModel : ViewModel() {
 
     fun loadBySearch(name: String) {
         _isLoading.value = true
-        productRepository.fetchProductBySearch(name) { result ->
-            _isLoading.value = false
-            result.onSuccess { productsList -> _products.value = productsList }
-            result.onFailure { e -> _error.value = e.message ?: "Неизвестная ошибка" }
+        productRepository.signIn { tokenResult ->
+            tokenResult.onSuccess { token ->
+                productRepository.fetchProductBySearch(token, name) { searchResult ->
+                    _isLoading.value = false
+                    searchResult.onSuccess { productsList -> _products.value = productsList }
+                    searchResult.onFailure { e -> _error.value = e.message ?: "Неизвестная ошибка" }
+                }
+            }
+            tokenResult.onFailure { e -> _error.value = e.message }
         }
+
     }
 }

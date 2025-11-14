@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.anlyashenko.fragmentapp.databinding.FragmentNetworkBinding
+import ru.anlyashenko.fragmentapp.model.User
 import ru.anlyashenko.fragmentapp.viewModel.PostViewModel
 import ru.anlyashenko.fragmentapp.viewModel.UserViewModel
 
@@ -40,7 +41,7 @@ class NetworkFragment : Fragment() {
             viewModel.loadProductById(2)
         }
 
-        viewModel.product.observe(viewLifecycleOwner) {product ->
+        viewModel.product.observe(viewLifecycleOwner) { product ->
             binding.tvResult.text = product
         }
 
@@ -50,16 +51,13 @@ class NetworkFragment : Fragment() {
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(newText: String?): Boolean {
-                newText?.let { query ->
-                    if (query.length >= 2) {
-                        viewModel.loadBySearch(query)
-                    }
+                newText?.let {
+                    viewModel.loadBySearch(it)
                 }
                 return true
             }
 
             override fun onQueryTextSubmit(query: String?): Boolean {
-                query?.let { viewModel.loadBySearch(it) }
                 return true
             }
 
