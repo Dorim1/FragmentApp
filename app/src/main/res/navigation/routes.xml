@@ -31,7 +31,19 @@
                 app:destination="@id/fragmentFour"
                 app:restoreState="true"
                 app:popUpToSaveState="true"/>
+            <action
+                android:id="@+id/action_fragmentOne_to_networkFragment"
+                app:destination="@id/networkFragment" />
+            <action
+                android:id="@+id/action_fragmentOne_to_authenticationFragment"
+                app:destination="@id/authenticationFragment" />
         </fragment>
+
+        <fragment
+            android:id="@+id/authenticationFragment"
+            android:name="ru.anlyashenko.fragmentapp.view.AuthenticationFragment"
+            android:label="fragment_authentication"
+            tools:layout="@layout/fragment_authentication" />
 
         <fragment
             android:id="@+id/fragmentTwo"
@@ -42,6 +54,12 @@
                 android:name="user"
                 app:argType="ru.anlyashenko.fragmentapp.User" />
         </fragment>
+
+        <fragment
+            android:id="@+id/networkFragment"
+            android:name="ru.anlyashenko.fragmentapp.view.NetworkFragment"
+            android:label="fragment_network"
+            tools:layout="@layout/fragment_network" />
 
         <fragment
             android:id="@+id/fragmentFour"
@@ -66,4 +84,6 @@
             android:label="fragment_three"
             tools:layout="@layout/fragment_three" />
     </navigation>
+
+
 </navigation>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context=".view.NetworkFragment">
+
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"/>
+
+    <Button
+        android:id="@+id/btnFetchRetrofit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="Загрузить c Retrofit"/>
+
+    <Button
+        android:id="@+id/btnFetchOkhttpUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Загрузить пользователя"/>
+
+    <EditText
+        android:id="@+id/etPostIdDelete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Введите id объекта для удаления"
+        android:layout_marginHorizontal="20dp"
+        android:inputType="number"/>
+
+    <EditText
+        android:id="@+id/etPostIdToUpdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Введите id объекта для обновления"
+        android:layout_marginHorizontal="20dp"
+        android:inputType="number"/>
+
+    <EditText
+        android:id="@+id/etNewTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Введите новый Title"
+        android:layout_marginHorizontal="20dp"
+        android:inputType="text"/>
+
+    <EditText
+        android:id="@+id/etNewBody"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Введите новый Body"
+        android:layout_marginHorizontal="20dp"
+        android:inputType="text"/>
+
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Удалить"/>
+
+    <Button
+        android:id="@+id/btnUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Обновить"/>
+
+    <Button
+        android:id="@+id/btnCreate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Создать"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tvResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="result"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/postsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
