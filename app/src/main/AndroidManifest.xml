@@ -25,6 +25,8 @@
             </intent-filter>
             <nav-graph android:value="@navigation/routes"/>
         </activity>
+
+        <service android:name=".services.StartedService" />
     </application>
 
 </manifest>
