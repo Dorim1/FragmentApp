@@ -35,7 +35,7 @@ class PostViewModel : ViewModel() {
 
 
         // Retrofit
-    private val productRepository = ProductRepository() // retrofit
+    private val productRepository = ProductRepository()
     private val repositoryAuth = AuthRepository()
 
     private val _user = MutableLiveData<User>()

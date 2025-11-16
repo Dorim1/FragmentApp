@@ -18,12 +18,13 @@ class AuthRepository {
 
     private val json = Json { ignoreUnknownKeys = true }
 
-    private val uiHandler = Handler(Looper.getMainLooper())
 
     private val retrofit = Retrofit.Builder()
         .baseUrl("https://dummyjson.com/")
-        .addConverterFactory(json.asConverterFactory(
-            "application/json".toMediaType())
+        .addConverterFactory(
+            json.asConverterFactory(
+                "application/json".toMediaType()
+            )
         )
         .build()
 
@@ -36,12 +37,10 @@ class AuthRepository {
                 response: Response<User>
             ) {
                 val user = response.body()
-                uiHandler.post {
-                    if (response.isSuccessful && user != null) {
-                        callback(Result.success(user))
-                    } else {
-                        uiHandler.post { callback(Result.failure(Exception("Ошибка: ${response.code()}"))) }
-                    }
+                if (response.isSuccessful && user != null) {
+                    callback(Result.success(user))
+                } else {
+                    callback(Result.failure(Exception("Ошибка: ${response.code()}")))
                 }
             }
 
@@ -49,7 +48,7 @@ class AuthRepository {
                 call: Call<User>,
                 t: Throwable
             ) {
-                uiHandler.post { callback(Result.failure(t)) }
+                callback(Result.failure(t))
             }
 
         })
