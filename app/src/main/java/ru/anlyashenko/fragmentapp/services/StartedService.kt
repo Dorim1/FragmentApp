@@ -7,6 +7,7 @@ import android.app.Service
 import android.content.Intent
 import android.content.pm.ServiceInfo
 import android.content.res.Resources
+import android.os.Binder
 import android.os.Build
 import android.os.IBinder
 import android.util.Log
@@ -14,15 +15,19 @@ import ru.anlyashenko.fragmentapp.R
 import kotlin.concurrent.thread
 
 class StartedService : Service() {
+    inner class LocalBinder : Binder() {
+        fun getService() = this@StartedService
+    }
 
+    private val binder = LocalBinder()
+    var onProgressChanged: ((Int) -> Unit)? = null
     private var serviceThread: Thread? = null
-
     private val notificationManager by lazy {
         getSystemService(NOTIFICATION_SERVICE) as NotificationManager
     }
 
-    override fun onBind(intent: Intent?): IBinder? {
-        return null
+    override fun onBind(intent: Intent?): IBinder {
+        return binder
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -51,7 +56,11 @@ class StartedService : Service() {
                             break
                         } else {
                             Log.d("Service", "Прогресс: $progress")
-                            notificationManager.notify(NOTIFICATION_ID, createNotification(progress))
+                            notificationManager.notify(
+                                NOTIFICATION_ID,
+                                createNotification(progress)
+                            )
+                            onProgressChanged?.invoke(progress)
                             Thread.sleep(1000)
                         }
 
@@ -68,7 +77,7 @@ class StartedService : Service() {
         }
     }
 
-    private fun createNotification(progress: Int) : Notification {
+    private fun createNotification(progress: Int): Notification {
         val intent = Intent(this, StartedService::class.java)
         intent.action = ACTION_STOP
         val pendingIntent = PendingIntent.getService(
@@ -76,7 +85,7 @@ class StartedService : Service() {
             0,
             intent,
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
-            )
+        )
 
         val builder = Notification.Builder(this, CHANNEL_ID)
             .setContentTitle("Загрузка данных")
@@ -102,6 +111,8 @@ class StartedService : Service() {
         serviceThread?.interrupt()
         super.onDestroy()
     }
+
+
 }
 
 private const val ACTION_STOP = "ru.anlyashenko.stop_service"
