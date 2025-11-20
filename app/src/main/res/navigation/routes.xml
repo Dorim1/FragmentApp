@@ -37,7 +37,16 @@
             <action
                 android:id="@+id/action_fragmentOne_to_authenticationFragment"
                 app:destination="@id/authenticationFragment" />
+            <action
+                android:id="@+id/action_fragmentOne_to_serviceFragment"
+                app:destination="@id/serviceFragment" />
         </fragment>
+
+        <fragment
+            android:id="@+id/serviceFragment"
+            android:name="ru.anlyashenko.fragmentapp.view.ServiceFragment"
+            android:label="fragment_service"
+            tools:layout="@layout/fragment_service" />
 
         <fragment
             android:id="@+id/authenticationFragment"
