@@ -20,9 +20,12 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getSystemService
+import androidx.fragment.app.viewModels
 import ru.anlyashenko.fragmentapp.R
 import ru.anlyashenko.fragmentapp.databinding.FragmentServiceBinding
 import ru.anlyashenko.fragmentapp.services.StartedService
+import ru.anlyashenko.fragmentapp.viewModel.ServiceViewModel
+import ru.anlyashenko.fragmentapp.viewModel.ViewModelFactory
 
 class ServiceFragment : Fragment() {
 
@@ -30,31 +33,35 @@ class ServiceFragment : Fragment() {
     private val binding
         get() = _binding!!
 
-    private var isBound = false
-    private var service: StartedService? = null
-
-    private val connection = object : ServiceConnection {
-        override fun onServiceConnected(
-            name: ComponentName?,
-            service: IBinder?
-        ) {
-            val binder = service as StartedService.LocalBinder
-            this@ServiceFragment.service = binder.getService()
-            isBound = true
-
-            this@ServiceFragment.service?.onProgressChanged = { progress ->
-                binding.root.post {
-                    binding.progressBar.progress = progress
-                }
-            }
-        }
-
-        override fun onServiceDisconnected(name: ComponentName?) {
-            service = null
-            isBound = false
-        }
-
+    private val viewModel: ServiceViewModel by viewModels {
+        ViewModelFactory(requireContext())
     }
+
+//    private var isBound = false
+//    private var service: StartedService? = null
+
+//    private val connection = object : ServiceConnection {
+//        override fun onServiceConnected(
+//            name: ComponentName?,
+//            service: IBinder?
+//        ) {
+//            val binder = service as StartedService.LocalBinder
+//            this@ServiceFragment.service = binder.getService()
+//            isBound = true
+//
+//            this@ServiceFragment.service?.onProgressChanged = { progress ->
+//                binding.root.post {
+//                    binding.progressBar.progress = progress
+//                }
+//            }
+//        }
+//
+//        override fun onServiceDisconnected(name: ComponentName?) {
+//            service = null
+//            isBound = false
+//        }
+//
+//    }
     private val requestPermissionsLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted: Boolean ->
@@ -67,8 +74,9 @@ class ServiceFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        val intent = Intent(requireContext(), StartedService::class.java)
-        requireActivity().bindService(intent, connection, Context.BIND_AUTO_CREATE)
+//        val intent = Intent(requireContext(), StartedService::class.java)
+//        requireActivity().bindService(intent, connection, Context.BIND_AUTO_CREATE)
+        viewModel.startWork()
     }
 
     override fun onCreateView(
@@ -87,23 +95,28 @@ class ServiceFragment : Fragment() {
         binding.btnStartService.setOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
-                    startService()
+                    viewModel.startWork()
                 } else {
                     requestPermissionsLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
                 }
             } else {
-                startService()
+                viewModel.startWork()
             }
         }
 
         binding.btnStopService.setOnClickListener {
-            val intent = Intent(requireContext(), StartedService::class.java)
-            requireActivity().stopService(intent)
+//            val intent = Intent(requireContext(), StartedService::class.java)
+//            requireActivity().stopService(intent)
+            viewModel.stopWork()
             Toast.makeText(requireContext(), "Сервис отменён", Toast.LENGTH_SHORT).show()
         }
 
         binding.btnCheckUI.setOnClickListener {
             Toast.makeText(requireContext(), "UI отвечает!", Toast.LENGTH_SHORT).show()
+        }
+
+        viewModel.progress.observe(viewLifecycleOwner) { progress ->
+            binding.progressBar.progress = progress
         }
 
     }
@@ -128,11 +141,13 @@ class ServiceFragment : Fragment() {
 
     override fun onStop() {
         super.onStop()
-        if (isBound) {
-            service?.onProgressChanged = null
-            requireActivity().unbindService(connection)
-            isBound = false
-        }
+//        if (isBound) {
+//            service?.onProgressChanged = null
+//            requireActivity().unbindService(connection)
+//            isBound = false
+//        }
+        viewModel.unbindingConnection()
+
     }
 
     override fun onDestroyView() {
