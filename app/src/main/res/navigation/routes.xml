@@ -40,7 +40,16 @@
             <action
                 android:id="@+id/action_fragmentOne_to_serviceFragment"
                 app:destination="@id/serviceFragment" />
+            <action
+                android:id="@+id/action_fragmentOne_to_broadcastFragment"
+                app:destination="@id/broadcastFragment" />
         </fragment>
+
+        <fragment
+            android:id="@+id/broadcastFragment"
+            android:name="ru.anlyashenko.fragmentapp.view.BroadcastFragment"
+            android:label="fragment_broadcast"
+            tools:layout="@layout/fragment_broadcast" />
 
         <fragment
             android:id="@+id/serviceFragment"
@@ -93,6 +102,7 @@
             android:label="fragment_three"
             tools:layout="@layout/fragment_three" />
     </navigation>
+
 
 
 </navigation>

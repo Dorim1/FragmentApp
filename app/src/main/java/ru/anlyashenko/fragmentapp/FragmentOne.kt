@@ -46,6 +46,8 @@ class FragmentOne : Fragment() {
         binding.btnToFragmentAuthentication.setOnClickListener { navController.navigate(R.id.action_fragmentOne_to_authenticationFragment) }
 
         binding.btnToFragmentService.setOnClickListener { navController.navigate(R.id.action_fragmentOne_to_serviceFragment) }
+
+        binding.btnToFragmentBroadcast.setOnClickListener { navController.navigate(R.id.action_fragmentOne_to_broadcastFragment) }
     }
 
 }
