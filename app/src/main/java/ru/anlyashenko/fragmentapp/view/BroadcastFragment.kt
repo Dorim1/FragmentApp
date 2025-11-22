@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import ru.anlyashenko.fragmentapp.AirplaneModeReceiver
+import ru.anlyashenko.fragmentapp.receivers.AirplaneModeReceiver
 import ru.anlyashenko.fragmentapp.R
 import ru.anlyashenko.fragmentapp.databinding.FragmentBroadcastBinding
 

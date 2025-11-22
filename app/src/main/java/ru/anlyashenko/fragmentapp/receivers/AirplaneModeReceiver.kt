@@ -1,10 +1,8 @@
-package ru.anlyashenko.fragmentapp
+package ru.anlyashenko.fragmentapp.receivers
 
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.widget.Toast
-import javax.security.auth.callback.Callback
 
 class AirplaneModeReceiver(
     private val callback: (Boolean) -> Unit
