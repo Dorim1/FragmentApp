@@ -12,3 +12,5 @@ class BootReceiver : BroadcastReceiver() {
         }
     }
 }
+
+const val ACTION_CUSTOM_EVENT = "ru.anlyashenko.fragmentapp.ACTION_DATA_READY"
