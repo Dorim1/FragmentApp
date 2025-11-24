@@ -78,7 +78,7 @@ class BroadcastFragment : Fragment() {
         val intent = Intent(ACTION_CUSTOM_EVENT)
         intent.putExtra("EXTRA_MESSAGE", "Загрузка завершена успешно!")
         intent.setPackage(context.packageName)
-        context.sendBroadcast(intent)
+        context.sendBroadcast(intent, android.Manifest.permission.INTERNET)
     }
 
     override fun onStop() {
