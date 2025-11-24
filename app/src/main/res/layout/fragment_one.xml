@@ -8,6 +8,13 @@
     tools:context=".FragmentOne">
 
     <Button
+        android:id="@+id/btnToFragmentBroadcast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:text="Фрагмент Broadcast"/>
+
+    <Button
         android:id="@+id/btnToFragmentService"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
