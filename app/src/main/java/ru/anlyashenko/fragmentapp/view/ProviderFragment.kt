@@ -12,6 +12,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
+import ru.anlyashenko.fragmentapp.R
 import ru.anlyashenko.fragmentapp.databinding.FragmentProviderBinding
 import kotlin.concurrent.thread
 
@@ -45,6 +47,10 @@ class ProviderFragment : Fragment() {
 
         binding.btnSendContacts.setOnClickListener {
             checkPermission()
+        }
+
+        binding.btnOpenToFragmentImages.setOnClickListener {
+            findNavController().navigate(R.id.action_providerFragment_to_imagesFragment)
         }
 
     }

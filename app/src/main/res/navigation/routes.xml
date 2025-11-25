@@ -49,10 +49,20 @@
         </fragment>
 
         <fragment
+            android:id="@+id/imagesFragment"
+            android:name="ru.anlyashenko.fragmentapp.view.ImagesFragment"
+            android:label="fragment_images"
+            tools:layout="@layout/fragment_images" />
+
+        <fragment
             android:id="@+id/providerFragment"
             android:name="ru.anlyashenko.fragmentapp.view.ProviderFragment"
             android:label="fragment_provider"
-            tools:layout="@layout/fragment_provider" />
+            tools:layout="@layout/fragment_provider" >
+            <action
+                android:id="@+id/action_providerFragment_to_imagesFragment"
+                app:destination="@id/imagesFragment" />
+        </fragment>
 
         <fragment
             android:id="@+id/broadcastFragment"
