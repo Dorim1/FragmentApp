@@ -48,6 +48,8 @@ class FragmentOne : Fragment() {
         binding.btnToFragmentService.setOnClickListener { navController.navigate(R.id.action_fragmentOne_to_serviceFragment) }
 
         binding.btnToFragmentBroadcast.setOnClickListener { navController.navigate(R.id.action_fragmentOne_to_broadcastFragment) }
+
+        binding.btnToFragmentProvider.setOnClickListener { navController.navigate(R.id.action_fragmentOne_to_providerFragment) }
     }
 
 }

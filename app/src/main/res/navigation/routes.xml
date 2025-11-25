@@ -43,7 +43,16 @@
             <action
                 android:id="@+id/action_fragmentOne_to_broadcastFragment"
                 app:destination="@id/broadcastFragment" />
+            <action
+                android:id="@+id/action_fragmentOne_to_providerFragment"
+                app:destination="@id/providerFragment" />
         </fragment>
+
+        <fragment
+            android:id="@+id/providerFragment"
+            android:name="ru.anlyashenko.fragmentapp.view.ProviderFragment"
+            android:label="fragment_provider"
+            tools:layout="@layout/fragment_provider" />
 
         <fragment
             android:id="@+id/broadcastFragment"
