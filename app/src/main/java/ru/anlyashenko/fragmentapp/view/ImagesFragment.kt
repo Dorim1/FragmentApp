@@ -52,6 +52,7 @@ class ImagesFragment : Fragment() {
 
         binding.rvImages.adapter = adapter
         binding.rvImages.layoutManager = GridLayoutManager(requireContext(), 2)
+
     }
 
     private fun loadImages() {
