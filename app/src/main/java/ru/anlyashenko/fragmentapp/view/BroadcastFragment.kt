@@ -72,6 +72,8 @@ class BroadcastFragment : Fragment() {
             sendBroadcast(requireContext())
         }
 
+
+
     }
 
     fun sendBroadcast(context: Context) {

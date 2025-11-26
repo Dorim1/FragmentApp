@@ -61,6 +61,7 @@ dependencies {
     implementation(libs.retrofit2)
     implementation(libs.retrofit.kotlinx.serialization)
     implementation(libs.picasso)
+    implementation(libs.coil)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
