@@ -47,6 +47,8 @@ class FragmentInflation : Fragment() {
         binding.btnClear.setOnClickListener {
             binding.llContainer.removeAllViews()
         }
+
+        binding.profileHeader.setProfileName("testik")
     }
 
     override fun onDestroyView() {

@@ -32,6 +32,12 @@
         android:layout_gravity="center_horizontal"
         app:cornerRadius="30dp"/>
 
+    <ru.anlyashenko.fragmentapp.customView.ProfileCardView
+        android:id="@+id/profileHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"/>
+
     <Button
         android:id="@+id/btnAutoAdd"
         android:layout_width="wrap_content"
