@@ -20,7 +20,6 @@ class FragmentInflation : Fragment() {
     ): View {
         _binding = FragmentInflationBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
