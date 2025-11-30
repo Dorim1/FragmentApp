@@ -49,6 +49,7 @@ class FragmentInflation : Fragment() {
         }
 
         binding.profileHeader.setProfileName("testik")
+
     }
 
     override fun onDestroyView() {
