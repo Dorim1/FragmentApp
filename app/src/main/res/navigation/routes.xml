@@ -100,9 +100,9 @@
 
         <fragment
             android:id="@+id/fragmentFour"
-            android:name="ru.anlyashenko.fragmentapp.FragmentFour"
+            android:name="ru.anlyashenko.fragmentapp.FragmentInflation"
             android:label="fragment_four"
-            tools:layout="@layout/fragment_four" >
+            tools:layout="@layout/fragment_inflation" >
             <action
                 android:id="@+id/action_fragmentFour_to_fragmentFive"
                 app:destination="@id/fragmentFive"
