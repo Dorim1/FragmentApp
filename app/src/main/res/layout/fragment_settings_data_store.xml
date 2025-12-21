@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".view.SettingsDataStoreFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:textSize="18sp"
+        android:text="Сортировка" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupSort"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/rbSortPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="По цене"/>
+
+        <RadioButton
+            android:id="@+id/rbSortAlphabet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="По алфавиту"/>
+    </RadioGroup>
+
+    <CheckBox
+        android:id="@+id/cbStock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Показывать только в наличии"/>
+
+    <TextView
+        android:id="@+id/tvMinPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Минимальная цена"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/etMinPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Введите сумму (например, 100)"
+        android:inputType="number"/>
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Имя"/>
+
+    <EditText
+        android:id="@+id/etInputName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Введите имя"/>
+
+    <RadioGroup
+        android:id="@+id/radioGroupRoles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/rbRoleUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User"/>
+
+        <RadioButton
+            android:id="@+id/rbRoleGuest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Guest"/>
+
+        <RadioButton
+            android:id="@+id/rbRoleAdmin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Admin"/>
+    </RadioGroup>
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/switchNotification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Уведомления"/>
+
+    <Button
+        android:id="@+id/btnClearAll"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="clear"/>
+
+
+</LinearLayout>
