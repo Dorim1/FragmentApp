@@ -1,18 +1,19 @@
-package ru.anlyashenko.fragmentapp.view
+package ru.anlyashenko.fragmentapp.dataStore.ui.view
 
-import android.R.attr.text
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doAfterTextChanged
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import ru.anlyashenko.fragmentapp.R
 import ru.anlyashenko.fragmentapp.databinding.FragmentSettingsDataStoreBinding
-import ru.anlyashenko.fragmentapp.model.UserRole
-import ru.anlyashenko.fragmentapp.viewModel.SettingsDataStoreViewModel
-import ru.anlyashenko.fragmentapp.viewModel.SettingsViewModelFactory
+import ru.anlyashenko.fragmentapp.dataStore.data.model.UserRole
+import ru.anlyashenko.fragmentapp.dataStore.ui.viewModel.GameCharacterViewModel
+import ru.anlyashenko.fragmentapp.dataStore.ui.viewModel.GameCharacterViewModelFactory
+import ru.anlyashenko.fragmentapp.dataStore.ui.viewModel.SettingsDataStoreViewModel
+import ru.anlyashenko.fragmentapp.dataStore.ui.viewModel.SettingsViewModelFactory
 
 class SettingsDataStoreFragment : Fragment() {
 
@@ -22,6 +23,10 @@ class SettingsDataStoreFragment : Fragment() {
 
     private val viewModel: SettingsDataStoreViewModel by viewModels {
         SettingsViewModelFactory(requireContext())
+    }
+
+    private val viewModelGameCharacter: GameCharacterViewModel by viewModels {
+        GameCharacterViewModelFactory(requireContext())
     }
 
     override fun onCreateView(
@@ -35,6 +40,24 @@ class SettingsDataStoreFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModelGameCharacter.character.observe(viewLifecycleOwner) { character ->
+            binding.tvNickname.text = character.nickname
+            binding.tvLevel.text = "level: ${character.level}"
+            binding.tvHp.text = "HP: ${character.stats.hp}"
+            binding.tvStamina.text = "Stamina: ${character.stats.stamina}"
+            binding.tvMana.text = "Mana: ${character.stats.mana}"
+            binding.tvInventory.text = character.inventory.joinToString(", ")
+        }
+
+        binding.btnLevelUp.setOnClickListener {
+            viewModelGameCharacter.levelUp()
+        }
+
+        binding.btnAddItem.setOnClickListener {
+            viewModelGameCharacter.addItem("Sword")
+        }
+
+
         with(binding) {
             etInputName.doAfterTextChanged {
                 val name = etInputName.text.toString()
@@ -47,6 +70,7 @@ class SettingsDataStoreFragment : Fragment() {
 
             btnClearAll.setOnClickListener {
                 viewModel.onClearClicked()
+                viewModelGameCharacter.resetCharacter()
             }
 
             radioGroupRoles.setOnCheckedChangeListener { _, isChecked ->

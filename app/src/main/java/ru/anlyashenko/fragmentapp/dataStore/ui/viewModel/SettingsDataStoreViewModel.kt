@@ -1,15 +1,15 @@
-package ru.anlyashenko.fragmentapp.viewModel
+package ru.anlyashenko.fragmentapp.dataStore.ui.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import ru.anlyashenko.fragmentapp.DataStoreManager
-import ru.anlyashenko.fragmentapp.DataStoreManagerRole
-import ru.anlyashenko.fragmentapp.UserDraft
-import ru.anlyashenko.fragmentapp.UserPreferences
-import ru.anlyashenko.fragmentapp.model.UserRole
+import ru.anlyashenko.fragmentapp.dataStore.data.model.DataStoreManager
+import ru.anlyashenko.fragmentapp.dataStore.data.model.DataStoreManagerRole
+import ru.anlyashenko.fragmentapp.dataStore.data.model.UserDraft
+import ru.anlyashenko.fragmentapp.dataStore.data.model.UserPreferences
+import ru.anlyashenko.fragmentapp.dataStore.data.model.UserRole
 
 class SettingsDataStoreViewModel(
     private val dataStoreManager: DataStoreManager,

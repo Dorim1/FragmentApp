@@ -1,4 +1,4 @@
-package ru.anlyashenko.fragmentapp
+package ru.anlyashenko.fragmentapp.dataStore.data.model
 
 import android.content.Context
 import androidx.datastore.preferences.core.booleanPreferencesKey

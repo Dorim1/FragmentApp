@@ -43,7 +43,8 @@ retrofit2 = { group = "com.squareup.retrofit2",  name = "retrofit", version.ref 
 retrofit-kotlinx-serialization = { group = "com.squareup.retrofit2", name = "converter-kotlinx-serialization", version.ref = "retrofit" }
 picasso = { group = "com.squareup.picasso", name = "picasso", version.ref = "picasso" }
 coil = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
-datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "dataStore" }
+datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "dataStore" }
+datastore = { group = "androidx.datastore", name = "datastore", version.ref = "dataStore" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

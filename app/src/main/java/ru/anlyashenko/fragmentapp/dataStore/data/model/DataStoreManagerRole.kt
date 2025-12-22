@@ -1,4 +1,4 @@
-package ru.anlyashenko.fragmentapp
+package ru.anlyashenko.fragmentapp.dataStore.data.model
 
 import android.content.Context
 import androidx.datastore.preferences.core.booleanPreferencesKey
@@ -9,9 +9,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
-import ru.anlyashenko.fragmentapp.model.UserRole
 import java.io.IOException
-import kotlin.system.exitProcess
 
 val Context.dataStoreUser by preferencesDataStore(name = "user_role")
 
