@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.navigation.safeargs)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.protobuf)
     id("kotlin-parcelize")
 }
 
@@ -42,6 +43,25 @@ android {
     }
 }
 
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:${libs.versions.protobuf.get()}"
+    }
+
+    generateProtoTasks {
+        all().forEach { task ->
+            task.builtins {
+                create("java") {
+                    option("lite")
+                }
+                create("kotlin") {
+                    option("lite")
+                }
+            }
+        }
+    }
+}
+
 dependencies {
 
     implementation(libs.androidx.core.ktx)
@@ -64,6 +84,8 @@ dependencies {
     implementation(libs.coil)
     implementation(libs.datastore.preferences)
     implementation(libs.datastore)
+    implementation(libs.protobuf.javalite)
+    implementation(libs.protobuf.kotlin.lite)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

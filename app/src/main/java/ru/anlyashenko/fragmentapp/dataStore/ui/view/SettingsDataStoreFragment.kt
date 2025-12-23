@@ -10,6 +10,8 @@ import androidx.fragment.app.viewModels
 import ru.anlyashenko.fragmentapp.R
 import ru.anlyashenko.fragmentapp.databinding.FragmentSettingsDataStoreBinding
 import ru.anlyashenko.fragmentapp.dataStore.data.model.UserRole
+import ru.anlyashenko.fragmentapp.dataStore.ui.viewModel.AchievementViewModelFactory
+import ru.anlyashenko.fragmentapp.dataStore.ui.viewModel.AchievementsViewModel
 import ru.anlyashenko.fragmentapp.dataStore.ui.viewModel.GameCharacterViewModel
 import ru.anlyashenko.fragmentapp.dataStore.ui.viewModel.GameCharacterViewModelFactory
 import ru.anlyashenko.fragmentapp.dataStore.ui.viewModel.SettingsDataStoreViewModel
@@ -29,6 +31,10 @@ class SettingsDataStoreFragment : Fragment() {
         GameCharacterViewModelFactory(requireContext())
     }
 
+    private val viewModelProto: AchievementsViewModel by viewModels {
+        AchievementViewModelFactory(requireContext())
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,6 +45,34 @@ class SettingsDataStoreFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModelProto.achievements.observe(viewLifecycleOwner) { items ->
+            if (items.isNullOrEmpty()) {
+                binding.tvStatus.text = "Список достижений пуст"
+                binding.tvItemsList.text = ""
+            } else {
+                binding.tvStatus.text = "Всего достижений: ${items.size}"
+
+                val displayText = items.joinToString("\n") { achievement ->
+                    "🏆 ${achievement.title} — Прогресс: ${achievement.progress}%"
+                }
+                binding.tvItemsList.text = displayText
+            }
+        }
+
+        binding.btnAdd.setOnClickListener {
+            viewModelProto.onAddAchievement("Item")
+        }
+
+        binding.btnUpdateFirst.setOnClickListener {
+            val firstItem = viewModelProto.achievements.value?.firstOrNull()
+            if (firstItem != null) {
+                val newProgress = (firstItem.progress + 10).coerceAtMost(100)
+                viewModelProto.updateProgress(firstItem.title, newProgress)
+            }
+        }
+
+
 
         viewModelGameCharacter.character.observe(viewLifecycleOwner) { character ->
             binding.tvNickname.text = character.nickname
@@ -71,6 +105,7 @@ class SettingsDataStoreFragment : Fragment() {
             btnClearAll.setOnClickListener {
                 viewModel.onClearClicked()
                 viewModelGameCharacter.resetCharacter()
+                viewModelProto.onResetAll()
             }
 
             radioGroupRoles.setOnCheckedChangeListener { _, isChecked ->

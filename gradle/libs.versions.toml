@@ -20,6 +20,8 @@ retrofit = "3.0.0"
 picasso = "2.8"
 coil = "2.7.0"
 dataStore = "1.2.0"
+protobufPlugin = "0.9.6"
+protobuf = "4.32.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -45,10 +47,13 @@ picasso = { group = "com.squareup.picasso", name = "picasso", version.ref = "pic
 coil = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
 datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "dataStore" }
 datastore = { group = "androidx.datastore", name = "datastore", version.ref = "dataStore" }
+protobuf-javalite = { group = "com.google.protobuf", name = "protobuf-javalite", version.ref = "protobuf" }
+protobuf-kotlin-lite = { group = "com.google.protobuf", name = "protobuf-kotlin-lite", version.ref = "protobuf" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 navigation-safeargs = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigation" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+protobuf = { id = "com.google.protobuf", version.ref = "protobufPlugin"}
 
