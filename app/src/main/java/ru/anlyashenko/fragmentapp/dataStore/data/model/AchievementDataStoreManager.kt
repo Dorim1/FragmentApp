@@ -43,7 +43,7 @@ class AchievementDataStoreManager(
                 .build()
         }
 
-        // C Использование DSL (если настроен Kotlin Lite)
+        // или с использованием DSL (если настроен Kotlin Lite)
 
         /*dataStore.updateData { currentStore ->
             currentStore.copy {
