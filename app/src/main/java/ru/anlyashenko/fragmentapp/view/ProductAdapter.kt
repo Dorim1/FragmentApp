@@ -2,11 +2,12 @@ package ru.anlyashenko.fragmentapp.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.anlyashenko.fragmentapp.databinding.ItemPostBinding
 import ru.anlyashenko.fragmentapp.retrofit.Product
 
-class ProductAdapter : androidx.recyclerview.widget.ListAdapter<Product, ProductAdapter.ViewHolder>(
+class ProductAdapter : ListAdapter<Product, ProductAdapter.ViewHolder>(
     ProductDiffCallback()
 ) {
 

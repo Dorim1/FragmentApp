@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import ru.anlyashenko.fragmentapp.databinding.FragmentFiveBinding
 import androidx.core.content.edit
+import androidx.navigation.fragment.findNavController
 
 class FragmentFive : Fragment() {
 
@@ -50,6 +51,10 @@ class FragmentFive : Fragment() {
             prefs.edit {
                 putBoolean(KEY_DARK_MODE, isChecked)
             }
+        }
+
+        binding.btnOpenDataStoreFragment.setOnClickListener {
+            findNavController().navigate(R.id.action_fragmentFive_to_settingsDataStoreFragment)
         }
     }
 

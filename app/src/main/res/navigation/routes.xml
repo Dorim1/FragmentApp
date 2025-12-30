@@ -10,10 +10,20 @@
         app:startDestination="@id/fragmentOne">
 
         <fragment
+            android:id="@+id/settingsDataStoreFragment"
+            android:name="ru.anlyashenko.fragmentapp.dataStore.ui.view.SettingsDataStoreFragment"
+            android:label="fragment_settings_data_store"
+            tools:layout="@layout/fragment_settings_data_store" />
+
+        <fragment
             android:id="@+id/fragmentFive"
             android:name="ru.anlyashenko.fragmentapp.FragmentFive"
             android:label="fragment_five"
-            tools:layout="@layout/fragment_five"/>
+            tools:layout="@layout/fragment_five">
+            <action
+                android:id="@+id/action_fragmentFive_to_settingsDataStoreFragment"
+                app:destination="@id/settingsDataStoreFragment" />
+        </fragment>
 
         <fragment
             android:id="@+id/fragmentOne"
@@ -109,6 +119,7 @@
                 app:restoreState="true"
                 app:popUpToSaveState="true"/>
         </fragment>
+
     </navigation>
 
     <navigation

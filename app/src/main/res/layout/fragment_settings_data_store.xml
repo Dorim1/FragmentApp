@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".dataStore.ui.view.SettingsDataStoreFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:textSize="18sp"
+            android:text="Сортировка" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupSort"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/rbSortPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="По цене"/>
+
+            <RadioButton
+                android:id="@+id/rbSortAlphabet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="По алфавиту"/>
+        </RadioGroup>
+
+        <CheckBox
+            android:id="@+id/cbStock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Показывать только в наличии"/>
+
+        <TextView
+            android:id="@+id/tvMinPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Минимальная цена"/>
+
+        <EditText
+            android:id="@+id/etMinPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Введите сумму (например, 100)"
+            android:inputType="number"/>
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Имя"/>
+
+        <EditText
+            android:id="@+id/etInputName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Введите имя"
+            android:inputType="textPersonName"/>
+
+        <RadioGroup
+            android:id="@+id/radioGroupRoles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/rbRoleUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="User"/>
+
+            <RadioButton
+                android:id="@+id/rbRoleGuest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Guest"/>
+
+            <RadioButton
+                android:id="@+id/rbRoleAdmin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Admin"/>
+        </RadioGroup>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switchNotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Уведомления"/>
+
+        <TextView
+            android:id="@+id/tvNickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="nickname"/>
+
+        <TextView
+            android:id="@+id/tvLevel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="level"/>
+
+        <TextView
+            android:id="@+id/tvHp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="hp"/>
+
+        <TextView
+            android:id="@+id/tvStamina"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="stamina"/>
+
+        <TextView
+            android:id="@+id/tvMana"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="mana"/>
+
+        <TextView
+            android:id="@+id/tvInventory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="inventory"/>
+
+        <LinearLayout
+            android:id="@+id/buttonsGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnClearAll"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="clear all"/>
+
+            <Button
+                android:id="@+id/btnAddItem"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Add Item"/>
+
+            <Button
+                android:id="@+id/btnLevelUp"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="level UP"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="status"/>
+
+        <TextView
+            android:id="@+id/tvItemsList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="list"/>
+
+        <Button
+            android:id="@+id/btnAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Добавить в список"/>
+
+        <Button
+            android:id="@+id/btnUpdateFirst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Обновить"/>
+
+    </LinearLayout>
+
+</ScrollView>

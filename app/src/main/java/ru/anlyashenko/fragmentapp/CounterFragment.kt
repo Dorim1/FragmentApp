@@ -20,6 +20,7 @@ class CounterFragment : Fragment() {
 
     private val viewModel: CounterViewModel by viewModels()
 
+
 //    fun sampleVM() {
 //        val viewModelProvider = ViewModelProvider.create(
 //            owner = this@CounterFragment,
@@ -29,6 +30,7 @@ class CounterFragment : Fragment() {
 //        val counterViewModel = viewModelProvider[CounterViewModel::class.java]
 //        val anotherCounterViewModel = viewModelProvider["another", CounterViewModel::class.java]
 //    }
+    
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
